@@ -423,7 +423,7 @@ section{padding-block:67px;}
 .map-table .arrow{color:var(--signal);margin:0 8px;}
 
 .stat-row{display:flex;gap:var(--s6);flex-wrap:wrap;margin-top:var(--s2);}
-.stat{min-width:130px;}
+.stat{min-width:130px;display:flex;flex-direction:column;}
 .stat .num{font-family:var(--mono);font-size:var(--fs-xl);color:var(--signal-ink);font-weight:600;letter-spacing:-.01em;line-height:1;}
 .stat .label{font-size:var(--fs-sm);color:var(--steel);margin-top:8px;}
 
@@ -545,8 +545,8 @@ footer{
         <path class="edge" d="M780,110 L860,110"></path>
         <g class="node"><circle cx="40" cy="110" r="5"></circle><text x="40" y="132" text-anchor="middle">signal</text></g>
         <g class="node"><circle cx="220" cy="110" r="5"></circle><text x="220" y="132" text-anchor="middle">trigger</text></g>
-        <g class="node"><circle cx="620" cy="50" r="5"></circle><text x="620" y="34" text-anchor="middle">channel a</text></g>
-        <g class="node"><circle cx="620" cy="170" r="5"></circle><text x="620" y="196" text-anchor="middle">channel b</text></g>
+        <g class="node"><circle cx="620" cy="50" r="5"></circle><text x="620" y="34" text-anchor="middle">Email</text></g>
+        <g class="node"><circle cx="620" cy="170" r="5"></circle><text x="620" y="196" text-anchor="middle">SMS</text></g>
         <g class="node"><circle cx="780" cy="110" r="5"></circle><text x="780" y="132" text-anchor="middle">adapt</text></g>
       </svg>
       <div class="pulse-host" style="position:relative;height:0;">
@@ -596,8 +596,9 @@ footer{
 
   <section id="work">
     <div class="wrap">
+      <p class="cs-context reveal" style="max-width:var(--measure);margin-bottom:var(--s5);">I currently work in B2C CRM for IQOS, a regulated consumer product with a direct-to-consumer e-commerce site, physical touchpoints and a customer-service center. My work connects customer behavior across the website, Salesforce CRM, marketing automation, e-commerce and the service center.</p>
       <div class="section-head reveal">
-        <p class="eyebrow">Selected work</p>
+        <p class="eyebrow">Selected case studies</p>
         <h2>Two lifecycle systems, built from real customer signals.</h2>
       </div>
 
@@ -615,10 +616,6 @@ footer{
       <div class="cs-panel is-active reveal" id="panel-onboarding" role="tabpanel" aria-labelledby="tab-onboarding">
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--s4);">
           <span class="tag">Lifecycle design</span><span class="tag">Behavior triggers</span><span class="tag">Retention</span>
-        </div>
-
-        <div class="cs-block">
-          <p class="cs-context">I currently work in B2C CRM for IQOS, a regulated consumer product with a direct-to-consumer e-commerce site, physical touchpoints and a customer-service center. My work connects customer behavior across the website, Salesforce CRM, marketing automation, e-commerce and the service center.</p>
         </div>
 
         <div class="cs-block">
@@ -742,7 +739,6 @@ footer{
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow">Tools & stack</p>
-        <h2>What I build with.</h2>
       </div>
       <div class="tools-row reveal">
         <span class="tool-chip">Salesforce</span>
