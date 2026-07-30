@@ -279,6 +279,36 @@ section{padding-block:67px;}
 .nav-links a:not(.btn):hover{color:var(--ink);}
 @media (max-width:640px){ .nav-links a.hide-mobile{display:none;} }
 
+.nav-dropdown{position:relative;display:flex;align-items:center;}
+.nav-drop-caret{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;margin-left:2px;color:var(--steel);
+  border-radius:4px;flex:none;
+}
+.nav-drop-caret svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease);}
+.nav-dropdown.open .nav-drop-caret svg{transform:rotate(180deg);}
+.nav-drop-caret:hover{color:var(--ink);}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(-6px);
+  min-width:270px;
+  background:var(--paper-raised);
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:8px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+  z-index:110;
+}
+.nav-dropdown.open .nav-drop-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.nav-drop-menu a{
+  display:block;padding:10px 12px;border-radius:8px;
+  font-family:var(--sans);color:var(--ink);
+}
+.nav-drop-menu a:hover{background:var(--paper);}
+.nav-drop-menu .t{display:block;font-size:var(--fs-sm);font-weight:600;}
+.nav-drop-menu .d{display:block;font-family:var(--mono);font-size:var(--fs-2xs);color:var(--steel);margin-top:3px;letter-spacing:.01em;text-transform:none;}
+
 /* ---------- hero ---------- */
 .hero{
   padding-block:67px 92px;
@@ -517,7 +547,22 @@ footer{
     <a class="wordmark" href="#hero">Daniel Moyal</a>
     <div class="nav-links">
       <a class="hide-mobile" href="#practice">What I do</a>
-      <a href="#work">Work</a>
+      <div class="nav-dropdown" id="workDropdown">
+        <a href="#work">Work</a>
+        <button class="nav-drop-caret" type="button" aria-expanded="false" aria-label="Jump to a case study">
+          <svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"></polyline></svg>
+        </button>
+        <div class="nav-drop-menu" role="menu">
+          <a href="#work" role="menuitem" data-cs-jump="panel-onboarding">
+            <span class="t">Multi-Channel Onboarding</span>
+            <span class="d">Six-month onboarding &amp; retention journey</span>
+          </a>
+          <a href="#work" role="menuitem" data-cs-jump="panel-bridging">
+            <span class="t">Bridging Campaign</span>
+            <span class="d">Intent-based lead nurturing</span>
+          </a>
+        </div>
+      </div>
       <a class="hide-mobile" href="#approach">Approach</a>
       <a href="#contact">Contact</a>
       <a class="btn btn-ghost" id="navCvBtn" download="Daniel-Moyal-CV.pdf" href="assets/Daniel-Moyal-CV.pdf"><svg class="icon" viewBox="0 0 22 22"><line x1="11" y1="2" x2="11" y2="14"></line><polyline points="6,9 11,14 16,9"></polyline><line x1="3" y1="19" x2="19" y2="19"></line></svg>CV</a>
@@ -955,12 +1000,38 @@ footer{
 
   /* case-study tabs */
   var csTabs = document.querySelectorAll('.cs-tab');
+  function activateCsPanel(panelId){
+    csTabs.forEach(function(t){ t.setAttribute('aria-selected', t.getAttribute('aria-controls') === panelId ? 'true' : 'false'); });
+    document.querySelectorAll('.cs-panel').forEach(function(p){ p.classList.toggle('is-active', p.id === panelId); });
+  }
   csTabs.forEach(function(tab){
     tab.addEventListener('click', function(){
-      csTabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
-      tab.setAttribute('aria-selected','true');
-      document.querySelectorAll('.cs-panel').forEach(function(p){ p.classList.remove('is-active'); });
-      document.getElementById(tab.getAttribute('aria-controls')).classList.add('is-active');
+      activateCsPanel(tab.getAttribute('aria-controls'));
+    });
+  });
+
+  /* nav dropdown: jump straight into a case study */
+  var workDropdown = document.getElementById('workDropdown');
+  var dropCaret = workDropdown.querySelector('.nav-drop-caret');
+  function closeDropdown(){
+    workDropdown.classList.remove('open');
+    dropCaret.setAttribute('aria-expanded','false');
+  }
+  dropCaret.addEventListener('click', function(e){
+    e.stopPropagation();
+    var isOpen = workDropdown.classList.toggle('open');
+    dropCaret.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if(!workDropdown.contains(e.target)) closeDropdown();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeDropdown();
+  });
+  workDropdown.querySelectorAll('[data-cs-jump]').forEach(function(link){
+    link.addEventListener('click', function(){
+      activateCsPanel(link.dataset.csJump);
+      closeDropdown();
     });
   });
 
