@@ -457,12 +457,19 @@ section{padding-block:67px;}
 .stat .num{font-family:var(--mono);font-size:var(--fs-xl);color:var(--signal-ink);font-weight:600;letter-spacing:-.01em;line-height:1;}
 .stat .label{font-size:var(--fs-sm);color:var(--steel);margin-top:8px;}
 
+.stat-note{margin-top:var(--s3);color:var(--steel);font-size:var(--fs-sm);}
+
 .tools-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--s3);}
 .tool-chip{
   font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.02em;
   color:var(--ink);background:var(--paper-raised);
   border:1px solid var(--line);border-radius:8px;
   padding:8px 14px;
+}
+
+#tools{
+  background:color-mix(in srgb, var(--paper) 90%, var(--ink) 10%);
+  padding-block:40px;
 }
 
 /* ---------- approach (how I work) ---------- */
@@ -750,6 +757,7 @@ footer{
         <div class="cs-block">
           <h3>What I designed</h3>
           <p>Consumers completed a value-exchange engagement activity built around a short set of questions. Responses fed an intent-scoring model that classified each consumer as low, mid or high intent.</p>
+          <p>To calibrate the incentive that drove completion of that activity, I ran an A/B test on the offer amount with a small group of consumers with similar profiles, to see whether a higher incentive changed completion behavior and produced a more reliable read on real intent.</p>
           <p>Mid and high intent consumers entered a multichannel nurturing journey coordinated between CRM and the customer-service center: education on the product category, a one-click callback request, and a relevant offer introduced later in the journey.</p>
         </div>
 
@@ -777,6 +785,7 @@ footer{
           <ul class="role-list">
             <li>Activated an existing competitor-lead database through a structured engagement journey</li>
             <li>Designed the intent-scoring approach and low, mid and high audience paths</li>
+            <li>Ran an A/B test on the engagement-activity incentive to determine the offer level that best predicted genuine intent</li>
             <li>Planned a phased three-wave rollout with call-center readiness checks and UAT sign-off ahead of each wave</li>
             <li>Structured the multichannel nurturing journey across CRM and customer service</li>
             <li>Defined the educational sequence, callback flow, offer timing and eligibility rules</li>
@@ -790,6 +799,7 @@ footer{
             <div class="stat"><span class="num">14%</span><span class="label">of the 50,000 leads scored mid/high intent and entered the nurture journey</span></div>
             <div class="stat"><span class="num">&lt;1%</span><span class="label">opt-out rate across the journey</span></div>
           </div>
+          <p class="stat-note">The journey also converted competing-cigarette consumers directly to IQOS — exact volume not yet quantified.</p>
         </div>
       </div>
     </div>
